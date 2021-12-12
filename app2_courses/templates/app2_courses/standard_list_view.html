@@ -1,0 +1,35 @@
+{% extends "home.html" %}
+
+
+
+{% block content %}
+
+
+<!-- {% for standard in standards %}
+<div class="col-md-4 d-flex mb-5 justify-content-center">
+  <div class="card card-std text-center" style="width: 20rem;">
+    <div class="card-body text-center">
+      <h4 class="card-title" style="color:#ff5722;">{{standard.name}}</h4>
+     
+    </div>
+  </div>
+</div>
+{% endfor %} -->
+
+{% for standard in standards %}
+<!-- note s is small of standards it's coming from context_object_name = 'standards' in the views.py -->
+
+<h2>{{standard.name}} </h2>
+<!-- put in anchor tag for navigation and to make it uable with the slug -->
+<!-- provide href to the subject_list_view for the respective standard -->
+
+<!-- <a href="#"> {{standard.name}} </a> -->
+<a href="{% url 'app2_courses:subject_list' slug=standard.slug %}"> Get the subjects </a>
+<!-- we have predefined the slug in models of each table -->
+
+{% endfor %}
+
+
+{% endblock  %}
+
+

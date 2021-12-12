@@ -1,0 +1,23 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+{% comment %} provide forms here for updating {% endcomment %}
+
+<form method="post">
+    {% csrf_token %}
+
+    {{form.as_p}}
+    <!-- form , not forms -->
+
+    <input type="submit" value="submit">
+    <!-- No URL to redirect to.  Either provide a url or define a get_absolute_url method on the Model -->
+    <!-- add some get_absolute_url method in the models or here -->
+
+    <!-- also add button to cancel the update -->
+    <!-- send back the user to earlier page -->
+
+    <a href="{% url 'app2_courses:lesson_detail' standard=lessons.Standard.slug subject=lessons.subject.slug slug=lessons.slug %} ">cancel update</a>
+</form>
+
+{% endblock  %}

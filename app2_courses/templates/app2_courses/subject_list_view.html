@@ -1,0 +1,19 @@
+{% extends "home.html" %}
+
+{% block  content %}
+
+<h1>subjects for this standard</h1>
+
+{% for subject in standards.subjects.all  %}
+
+{{subject.name}}
+
+<!-- provide slug here -->
+<a href="{% url 'app2_courses:lesson_list' slug=subject.slug standard=standards.slug %}"> Get the Lessons </a>
+<!-- Note here that we have to provide two slugs here 1 for standard and one for the subject -->
+<br>
+
+<p>{{subject.description | truncatechars:75}}</p> <br>
+{% endfor %}
+
+{% endblock  %}

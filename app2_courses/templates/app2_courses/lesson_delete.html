@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<h2> Are you sure you want to delete this?</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="delete">
+
+    <a href="{% url 'app2_courses:lesson_detail' standard = lessons.Standard.slug subject = lessons.subject.slug slug=lessons.slug ">Delete the lesson [Confirm]</a>
+
+</form>
+
+{% endblock  %}

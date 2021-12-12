@@ -1,0 +1,20 @@
+{% extends "home.html" %}
+
+{% block  content %}
+
+
+
+
+{% for lesson in subjects.lessons.all %}
+                
+                      <h1>Chapter-{{lesson.position}}: {{lesson.name}}</h1>
+                    
+                      <a href="{% url 'app2_courses:lesson_detail' slug=lesson.slug subject=subjects.slug standard=lesson.Standard.slug %}" >
+                      Get Lesson Details
+                      </a>
+
+{% endfor %}
+
+<!-- to addd the new lesson, note the slug here -->
+<a href="{% url 'app2_courses:lesson_create' standard=subjects.standard.slug slug=subjects.slug %}"> Create a new Lesson </a>
+{% endblock  %}

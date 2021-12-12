@@ -1,0 +1,65 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+{% block title %} {{lessons.name}} {% endblock %}
+
+ Lesson Created on {{lessons.created_at}} by {{lessons.created_by}} 
+
+<a
+    href="{% url 'app2_courses:lesson_update'  standard=lessons.Standard.slug  subject=lessons.subject.slug slug=lessons.slug  %}">
+    Update the Lesson
+</a>
+<!-- add link to take the user to the lesson update -->
+
+<!-- don't ever forget to apply the migrations -->
+<br>
+
+<!-- for delete -->
+
+<a
+    href="{% url 'app2_courses:lesson_delete'  standard=lessons.Standard.slug  subject=lessons.subject.slug slug=lessons.slug  %}">
+    Delete Lesson </a>
+
+<h3>Comment Sectiom</h3>
+
+<form method="post">
+    <div class="form-group">
+        {% csrf_token %}
+
+        {{ form.as_p}}
+
+        <input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
+
+    </div>
+</form>
+
+
+
+<div class="row">
+    {% for comment in lessons.comments.all %}
+
+    <h4>{{comment.author}} <small><i>Posted on {{comment.date_added}}</i></small></h4>
+    <p>{{comment.body}}</p>
+    {% for reply in comment.replies.all %}
+
+    <h5>{{reply.author}} <small><i>Posted on {{reply.date_added}}</i></small></h5>
+    <p>{{reply.reply_body}}</p>
+
+    {% endfor %}
+    <!-- form to post reply -->
+    <form method="post">
+        <input type="hidden" name="comment.id" value="{{comment.id}}">
+        <input type="hidden" name="comment.comm_name" value="{{comment.comm_name}}">
+        {% csrf_token %}
+        {{form2.as_p}}
+        <input type="submit" name="form2" value="Add Reply" class="btn btn-warning btn-sm">
+
+
+
+
+
+        {% endfor %}
+</div>
+
+{% endblock %}
